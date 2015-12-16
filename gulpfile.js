@@ -38,7 +38,7 @@ gulp.task('less', function () {
         .pipe(less({
             paths: [path.join(__dirname, 'dist', 'css')]
         }))
-        .pipe(sourcemaps.write())
+     //   .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/css'));
 });
 
