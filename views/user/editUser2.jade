@@ -1,0 +1,24 @@
+extend ../layout.jade
+block content
+    form(role='form' action="/form" method="post")
+        .form-group
+            label(for='name') 姓名
+            input#name.form-control(name='username' type='text', placeholder='请输入名称')
+        .form-group
+            label(for='name') 年龄
+            input#name.form-control(name='password' type='text', placeholder='请输入名称')
+        .form-group
+            label(for='name') 家庭住址
+            input#name.form-control(name='salt' type='text', placeholder='请输入名称')
+        .form-group
+            label(for='name') 邮箱
+            input#name.form-control(name='email' type='text', placeholder='请输入名称')
+        .form-group
+            label(for='name') 简介
+            input#name.form-control(name='profile' type='text', placeholder='请输入名称')
+        button.btn.btn-default(type='submit') 提交
+
+
+
+
+
