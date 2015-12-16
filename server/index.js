@@ -35,6 +35,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
+//app.error(function(err, req, res){ res.render('500.jade', { error: err }); });//不知道有没有用
 //异常拦截
 app.use(function (req, res, next) {
     var reqDomain = domain.create();

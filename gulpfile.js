@@ -56,7 +56,7 @@ gulp.task("jade", [], function () {
         }))
         .pipe(gulp.dest('public/html'));
 });
-//将标准HTML转译成JADE格式文件
+//将标准HTML转译成JADE格式文件   中文乱码问题
 gulp.task('html2jade', function () {
     var options = {'nspaces': 2, encoding: 'UTF-8'};
     return gulp.src(['views/*.html', 'views/**/*.html'])
