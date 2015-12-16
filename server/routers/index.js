@@ -4,5 +4,7 @@
  var router = require('express').Router();
  module.exports = router;
 
-
+router.get('/editUser',function(req,res,next){
+ res.render('user/editUser');
+});
 

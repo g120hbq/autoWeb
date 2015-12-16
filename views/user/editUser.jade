@@ -1,0 +1,24 @@
+extend ../layout.jade
+
+
+
+block content
+    form(name="abc" action="/form" method="post")
+        | 姓名:
+        input(type="text" name="username")
+        br
+        | 年龄
+        input(type="text" name="password")
+        br
+        | 家庭住址
+        input(type="text" name="salt")
+        br
+        | 邮箱
+        input(type="text" name="email" checked=true)
+        br
+        | 简介
+        input( type="text" name="profile"   checked=true)
+        br
+        input(type='submit' value="提交")
+
+

@@ -1,5 +1,5 @@
 {
-  "directory" : "dist/jslib",
+  "directory" : "public/jslib",
   "json"      : "",
   "endpoint"  : "",
   "searchpath"  : "",

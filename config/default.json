@@ -1,0 +1,6 @@
+{
+  "a": 123,
+  "databaseConfig":{
+    "port":"27017"
+  }
+}

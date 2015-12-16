@@ -6,12 +6,13 @@ var http = require('http');
 
 var express = require('express');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 GLOBAL._ = require('lodash');
 GLOBAL.CONFIG = require('config');
 GLOBAL.Q = require('q');
 GLOBAL.moment = require('moment');
-moment.lang('zh-cn');
+moment.locale('zh-cn');
 GLOBAL.superagent = require('superagent');
 require('q-superagent');
 var favicon = require('serve-favicon');
@@ -24,7 +25,7 @@ var domain = require('domain');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'jade');     //
 
 app.use(logger('dev'));
@@ -54,6 +55,8 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/', require('./routers'));
+app.use('/api', require('./routers/api'));
 
 
 module.exports=require('http').createServer(app);
