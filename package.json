@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "pro1",
   "main": "app.js",
+  "repository":"git@github.com:g120hbq/autoWeb.git",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -w . -e coffee,js,json -i dist/ app.js"
   },
   "keywords": [
     "learn"
@@ -13,13 +15,25 @@
   "license": "111",
   "dependencies": {
     "colors": "^1.1.2",
+    "config": "^1.17.1",
+    "cookie-parser": "^1.4.0",
+    "debug": "^2.2.0",
+    "domain": "0.0.1",
     "express": "^4.13.3",
+    "express-state": "^1.3.0",
+    "express-useragent": "^0.2.4",
     "gulp-less": "^3.0.5",
     "gulp-typescript": "^2.10.0",
     "less": "^2.5.3",
     "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "morgan": "^1.6.1",
+    "pm": "^2.2.6",
     "q": "^1.4.1",
-    "q-locals": "^0.3.2"
+    "q-locals": "^0.3.2",
+    "q-superagent": "^1.0.1",
+    "serve-favicon": "^2.3.0",
+    "superagent": "^1.6.1"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
