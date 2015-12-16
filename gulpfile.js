@@ -17,7 +17,7 @@ gulp.task("default", ["clean"], function () {
 });
 //清理废弃文件
 gulp.task("clean", [], function () {
-    return gulp.src(['dist/css/*.css', 'dist/js/*.js', 'dist/html/*.html'], {read: false})
+    return gulp.src(['public/css/*.css', 'public/js/*.js', 'public/html/*.html'], {read: false})
         .pipe(clean({force: true}));
 });
 //编译typescript TS文件
@@ -30,7 +30,7 @@ gulp.task("typescript", [], function () {
         }));
     return merge([
         tsResult.dts.pipe(gulp.dest('client/ts-release-definitions')),
-        tsResult.js.pipe(gulp.dest('dist/js'))
+        tsResult.js.pipe(gulp.dest('public/js'))
     ]);
 });
 
@@ -39,10 +39,10 @@ gulp.task('less', function () {
     gutil.log(colors.red('开始编译less...'));
     return gulp.src('client/less/*.less')
         .pipe(less({
-            paths: [path.join(__dirname, 'dist', 'css')]
+            paths: [path.join(__dirname, 'public', 'css')]
         }))
         //   .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('public/css'));
 });
 
 //jade编译
@@ -52,7 +52,7 @@ gulp.task("jade", [], function () {
             client: false,
             pretty: true
         }))
-        .pipe(gulp.dest('dist/html'));
+        .pipe(gulp.dest('public/html'));
 });
 
 

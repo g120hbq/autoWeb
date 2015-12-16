@@ -1,16 +1,11 @@
-/**
- * Created by biqing.hu on 2015/12/16.
- */
-'use strict';
 
+'use strict';
 var path = require('path');
 var fs = require('fs');
 var http = require('http');
 
-
-
 var express = require('express');
-var morgan = require('morgan');
+var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 GLOBAL._ = require('lodash');
 GLOBAL.CONFIG = require('config');
@@ -32,6 +27,12 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');     //
 
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
 //异常拦截
 app.use(function (req, res, next) {
     var reqDomain = domain.create();
@@ -52,3 +53,7 @@ app.use(function (req, res, next) {
     }, 60000);
     next();
 });
+
+
+
+module.exports=require('http').createServer(app);
