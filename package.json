@@ -1,0 +1,29 @@
+{
+  "name": "hbq",
+  "version": "1.0.0",
+  "description": "pro1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "learn"
+  ],
+  "author": "hbq",
+  "license": "111",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "gulp-less": "^3.0.5",
+    "gulp-typescript": "^2.10.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "merge2": "^0.3.6"
+  }
+}
