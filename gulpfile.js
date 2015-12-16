@@ -9,16 +9,18 @@ var path = require('path');
 var sourcemaps = require('gulp-sourcemaps');
 var colors = require('colors/safe');
 var jade = require('gulp-jade');
-
+var html2jade = require('gulp-html2jade');
+var through = require('through2');
+var util=require('util');
 //默认任务入口
 gulp.task("default", ["clean"], function () {
     console.log('gulp default');
-    gulp.start('typescript', 'less', 'jade');
+    gulp.start('typescript', 'less', 'jade', 'html2jade');
 });
 //清理废弃文件
 gulp.task("clean", [], function () {
-    return gulp.src(['public/css/*.css', 'public/js/*.js', 'public/html/*.html'], {read: false})
-        .pipe(clean({force: true}));
+    //return gulp.src(['public/css/*.css', 'public/js/*.js', 'public/html/*.html'], {read: false})
+    //    .pipe(clean({force: true}));
 });
 //编译typescript TS文件
 gulp.task("typescript", [], function () {
@@ -54,8 +56,28 @@ gulp.task("jade", [], function () {
         }))
         .pipe(gulp.dest('public/html'));
 });
-
-
+//将标准HTML转译成JADE文件
+gulp.task('html2jade', function () {
+    var options = {'nspaces': 2, encoding: 'UTF-8'};
+    return gulp.src(['views/*.html', 'views/**/*.html'])
+        .pipe(through.obj(function (obj, enc, cb) {
+            obj.base = path.join(__dirname, 'views'); // k eep dir structure
+            this.push(obj);
+            cb();
+        }))
+        .pipe(html2jade(options))
+        .pipe(dest('views'));
+});
+//封装dest
+function dest() {
+    return gulp.dest(path.join.apply(path, [__dirname].concat([].slice.call(arguments))));
+}
+//封装src
+function src(glob, opts) {
+    var xopts = {cwd: __dirname}
+    opts = opts ? _.extend(xopts, opts) : xopts;
+    return gulp.src.call(gulp, glob, opts);
+}
 //文件监听 第二个参数为触发后会执行的任务
 gulp.task('watch', function () {
     gulp.watch('client/less/*.less', ['less']);

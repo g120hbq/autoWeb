@@ -14,6 +14,7 @@ GLOBAL.Q = require('q');
 GLOBAL.moment = require('moment');
 moment.locale('zh-cn');
 GLOBAL.superagent = require('superagent');
+GLOBAL.util=require('util');
 require('q-superagent');
 var favicon = require('serve-favicon');
 var debug = require('debug')('index');
@@ -32,7 +33,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 //异常拦截
 app.use(function (req, res, next) {

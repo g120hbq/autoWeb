@@ -3,22 +3,26 @@ extend ../layout.jade
 
 
 block content
-    form(name="abc" action="/form" method="post")
-        | 姓名:
-        input(type="text" name="username")
-        br
-        | 年龄
-        input(type="text" name="password")
-        br
-        | 家庭住址
-        input(type="text" name="salt")
-        br
-        | 邮箱
-        input(type="text" name="email" checked=true)
-        br
-        | 简介
-        input( type="text" name="profile"   checked=true)
-        br
-        input(type='submit' value="提交")
+    form.form-horizontal(role='form' action="/form" method="post")
+        .form-group
+            label.col-sm-2.control-label 姓名
+            .col-sm-10
+                input#focusedInput.form-control(name='username' type='text', value='该输入框获得焦点...')
+            label.col-sm-2.control-label 年龄
+            .col-sm-10
+                input#focusedInput.form-control(name='password' type='text', value='该输入框获得焦点...')
+            label.col-sm-2.control-label 家庭住址
+            .col-sm-10
+                input#focusedInput.form-control(name='salt' type='text', value='该输入框获得焦点...')
+            label.col-sm-2.control-label 邮箱
+            .col-sm-10
+                input#focusedInput.form-control(name='email' type='text', value='该输入框获得焦点...')
+            label.col-sm-2.control-label 简介
+            .col-sm-10
+                 input#focusedInput.form-control(name='profile' type='text', value='该输入框获得焦点...')
+            button.btn.btn-default(type='submit') 提交
+
+
+
 
 
