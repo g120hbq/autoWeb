@@ -5,17 +5,20 @@ var less = require('gulp-less');
 var merge = require('merge2');
 var concat = require('gulp-concat');
 var clean = require('gulp-clean');
-var path=require('path');
+var path = require('path');
 var sourcemaps = require('gulp-sourcemaps');
 var colors = require('colors/safe');
+var jade = require('gulp-jade');
+
+//默认任务入口
 gulp.task("default", ["clean"], function () {
     console.log('gulp default');
-    gulp.start('typescript','less');
+    gulp.start('typescript', 'less', 'jade');
 });
 //清理废弃文件
 gulp.task("clean", [], function () {
-     return gulp.src(['dist/css/*.css','dist/js/*.js'], {read: false})
-          .pipe(clean({force: true}));
+    return gulp.src(['dist/css/*.css', 'dist/js/*.js', 'dist/html/*.html'], {read: false})
+        .pipe(clean({force: true}));
 });
 //编译typescript TS文件
 gulp.task("typescript", [], function () {
@@ -38,12 +41,25 @@ gulp.task('less', function () {
         .pipe(less({
             paths: [path.join(__dirname, 'dist', 'css')]
         }))
-     //   .pipe(sourcemaps.write())
+        //   .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('watch',function(){
-    gulp.watch('client/less/*.less',['styles']);
-    gulp.watch('client/ts/*.ts',['scripts']);
+//jade编译
+gulp.task("jade", [], function () {
+    return gulp.src('client/jade/*.jade')
+        .pipe(jade({
+            client: false,
+            pretty: true
+        }))
+        .pipe(gulp.dest('dist/html'));
+});
+
+
+//文件监听 第二个参数为触发后会执行的任务
+gulp.task('watch', function () {
+    gulp.watch('client/less/*.less', ['less']);
+    gulp.watch('client/ts/*.ts', ['typescript']);
+    gulp.watch('client/jade/*.jade', ['jade']);
     //gulp.watch('views/*.jade',['templates']);
-})
+});

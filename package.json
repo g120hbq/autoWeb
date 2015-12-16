@@ -2,7 +2,7 @@
   "name": "hbq",
   "version": "1.0.0",
   "description": "pro1",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,13 +13,19 @@
   "license": "111",
   "dependencies": {
     "colors": "^1.1.2",
+    "express": "^4.13.3",
     "gulp-less": "^3.0.5",
-    "gulp-typescript": "^2.10.0"
+    "gulp-typescript": "^2.10.0",
+    "less": "^2.5.3",
+    "lodash": "^3.10.1",
+    "q": "^1.4.1",
+    "q-locals": "^0.3.2"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
+    "gulp-jade": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
