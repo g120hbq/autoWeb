@@ -12,9 +12,16 @@ var jade = require('gulp-jade');
 var html2jade = require('gulp-html2jade');
 var through = require('through2');
 var util=require('util');
+
+var imagemin = require('gulp-imagemin');
+
+
+
+
 //默认任务入口
 gulp.task("default", ["clean"], function () {
     console.log('gulp default');
+
     gulp.start('typescript', 'less', 'jade', 'html2jade');
 });
 //清理废弃文件
@@ -85,3 +92,21 @@ gulp.task('watch', function () {
     gulp.watch('client/jade/*.jade', ['jade']);
     //gulp.watch('views/*.jade',['templates']);
 });
+
+//图片压缩
+gulp.task('imagemin', function(){
+    gutil.log(colors.red('开始压缩图片...'));
+    //return gulp.src('C:/Users/hbqhb/Desktop/正式飞机游戏/backgrounds/*.**')
+    //    .pipe(imagemin())
+    //    .pipe(gulp.dest('C:/Users/hbqhb/Desktop/正式飞机游戏/backgrounds压缩'))
+
+/**
+ *gulp imagemin --key kkk --value vvvv
+ *  命令传参数 { _: [ 'imagemin' ], key: 'kkk', value: 'vvvv' }
+ * */
+    gutil.log(colors.yellow(util.inspect( gulp.env)));
+
+
+
+
+})
