@@ -1,3 +1,13 @@
 node_modules
 .idea
 jslib
+npm-debug.log
+
+node_modules/
+.git/
+
+
+.idea/
+.idea
+
+workspace.xml
