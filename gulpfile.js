@@ -116,7 +116,9 @@ gulp.task('browser-sync', function() {
     var port=gulp.env.port||port||4123;
     gutil.log(colors.red('browser-sync...'+port));
     browserSync.init({
-        //server: "./views"
+        //server: {
+        //    baseDir: "./"
+        //}
         proxy: "http://localhost:"+port
     });
     gulp.watch(['views/**/*.*','views/*.*']).on('change', reload);
