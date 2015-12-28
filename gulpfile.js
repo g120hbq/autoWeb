@@ -125,7 +125,8 @@ gulp.task('browser-sync', function() {
 
 gulp.task('test1',function(){
 
-    var ags = process.argv.splice(2);//拿命令参数
-    console.log(util.inspect(ags));
+    //var ags = process.argv.splice(2);//拿命令参数
+    //console.log(util.inspect(ags));
+
 
 })
