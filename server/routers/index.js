@@ -7,4 +7,7 @@
 router.get('/editUser',function(req,res,next){
  res.render('user/editUser');
 });
+router.get('/',function(req,res,next){
+ res.render('user/indexAAAAAAAAAAAAAA');
+});
 

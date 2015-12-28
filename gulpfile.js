@@ -12,7 +12,7 @@ var jade = require('gulp-jade');
 var html2jade = require('gulp-html2jade');
 var through = require('through2');
 var util=require('util');
-
+var livereload = require('gulp-livereload');
 var imagemin = require('gulp-imagemin');
 
 
@@ -73,7 +73,7 @@ gulp.task('html2jade', function () {
             cb();
         }))
         .pipe(html2jade(options))
-        .pipe(dest('views'));
+        .pipe(dest('views')).pipe(livereload({ start: true }));
 });
 //封装dest
 function dest() {
@@ -92,7 +92,14 @@ gulp.task('watch', function () {
     gulp.watch('client/jade/*.jade', ['jade']);
     //gulp.watch('views/*.jade',['templates']);
 });
-
+gulp.task('livereload', function () {
+    gutil.log(colors.red('livereload...'));
+    livereload.listen();
+    // app/**/*.*的意思是 app文件夹下的 任何文件夹 的 任何文件
+    gulp.watch(['views/**/*.*','views/*.*'],function(file){
+        livereload.changed(file);
+    });
+});
 //图片压缩
 gulp.task('imagemin', function(){
     gutil.log(colors.red('开始压缩图片...'));
