@@ -4,7 +4,9 @@
 var server = module.exports =require('./server');
 server.listen(process.env.PORT || 4123, function () {
     console.log('app listened');
-    var url='http://127.0.0.1:' + server.address().port;
+    var port=server.address().port;
+    var url='http://127.0.0.1:' +port;
+    writePort(port);
     console.log(url);
   //  openBrowser(url);
 });
@@ -23,4 +25,14 @@ var openBrowser = function (url){
             console.log('exec error: ' + 'start '+url);
         }
     });
+}
+
+var writePort = function (port){
+    var cmd='echo '+port+' > port.txt ';
+    child_process.exec(cmd,
+        function (error, stdout, stderr) {
+            if (error !== null) {
+                console.log('exec error: cmd->' + cmd);
+            }
+        });
 }

@@ -12,11 +12,10 @@ var jade = require('gulp-jade');
 var html2jade = require('gulp-html2jade');
 var through = require('through2');
 var util=require('util');
-var livereload = require('gulp-livereload');
 var imagemin = require('gulp-imagemin');
-
-
-
+var browserSync = require('browser-sync').create();
+var reload      = browserSync.reload;
+var read = require('file-reader');
 
 //默认任务入口
 gulp.task("default", ["clean"], function () {
@@ -73,7 +72,7 @@ gulp.task('html2jade', function () {
             cb();
         }))
         .pipe(html2jade(options))
-        .pipe(dest('views')).pipe(livereload({ start: true }));
+        .pipe(dest('views'));
 });
 //封装dest
 function dest() {
@@ -92,14 +91,7 @@ gulp.task('watch', function () {
     gulp.watch('client/jade/*.jade', ['jade']);
     //gulp.watch('views/*.jade',['templates']);
 });
-gulp.task('livereload', function () {
-    gutil.log(colors.red('livereload...'));
-    livereload.listen();
-    // app/**/*.*的意思是 app文件夹下的 任何文件夹 的 任何文件
-    gulp.watch(['views/**/*.*','views/*.*'],function(file){
-        livereload.changed(file);
-    });
-});
+
 //图片压缩
 gulp.task('imagemin', function(){
     gutil.log(colors.red('开始压缩图片...'));
@@ -112,8 +104,20 @@ gulp.task('imagemin', function(){
  *  命令传参数 { _: [ 'imagemin' ], key: 'kkk', value: 'vvvv' }
  * */
     gutil.log(colors.yellow(util.inspect( gulp.env)));
-
-
-
-
 })
+
+
+
+
+// 浏览器同步 :[gulp browser-sync --port 4123]
+gulp.task('browser-sync', function() {
+    var txtResult=read('port.txt');
+    var port=txtResult.port && parseInt(txtResult.port);
+    var port=gulp.env.port||port||4123;
+    gutil.log(colors.red('browser-sync...'+port));
+    browserSync.init({
+        //server: "./views"
+        proxy: "http://localhost:"+port
+    });
+    gulp.watch(['views/**/*.*','views/*.*']).on('change', reload);
+});
