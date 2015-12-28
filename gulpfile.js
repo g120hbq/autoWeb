@@ -16,7 +16,6 @@ var imagemin = require('gulp-imagemin');
 var browserSync = require('browser-sync').create();
 var reload      = browserSync.reload;
 var read = require('file-reader');
-
 //默认任务入口
 gulp.task("default", ["clean"], function () {
     console.log('gulp default');
@@ -123,3 +122,10 @@ gulp.task('browser-sync', function() {
     });
     gulp.watch(['views/**/*.*','views/*.*']).on('change', reload);
 });
+
+gulp.task('test1',function(){
+
+    var ags = process.argv.splice(2);//拿命令参数
+    console.log(util.inspect(ags));
+
+})
