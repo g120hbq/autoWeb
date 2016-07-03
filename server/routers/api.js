@@ -41,7 +41,7 @@ router.delete('/users/:id',function (req, res, next) {
 });
 
 
-
+var fs=require('fs');
 //base64保存为图片
 router.post('/upload', function(req, res){
 //接收前台POST过来的base64

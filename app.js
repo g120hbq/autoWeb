@@ -39,3 +39,19 @@ var writePort = function (port){
     writefile('port.txt',port+'');
     console.log('writefile:'+'port.txt'+'['+port+']');
 }
+
+
+
+var fs = require("fs") ;
+var path=require('path');
+var txt = "大家要好好学习NodeJS啊！！！" ;
+var appUtils=require('./app-utils');
+var createPath=path.resolve('./a/b/');
+//appUtils.mkdirs(createPath,function(){
+//      console.log('dddddddddddddddd--'+createPath)
+//    //写入文件
+//    fs.writeFile(createPath+"bbbb.txt",txt,'utf-8',function (err) {
+//        if (err) throw err ;
+//        console.log("File Saved !"); //文件被保存
+//    }) ;
+//});
