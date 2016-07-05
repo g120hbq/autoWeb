@@ -42,18 +42,24 @@ router.delete('/users/:id',function (req, res, next) {
 
 
 var fs=require('fs');
+var path=require('path');
 //base64保存为图片
-router.post('/upload', function(req, res){
+router.get('/saveShareImage', function(req, res){
+    var savePath=path.resolve("./public/images/share");
+    res.send(savePath+'/'+GLOBAL.moment().format("YYYYMMDDHHmmss"));
+    res.end();
+    return ;
 //接收前台POST过来的base64
     var imgData = req.body.imgData;
 //过滤data:URL
     var base64Data = imgData.replace(/^data:image\/\w+;base64,/,"");
     var dataBuffer = new Buffer(base64Data, 'base64');
-    fs.writeFile("image.png", dataBuffer, function(err) {
+    fs.writeFile(savePath+'/'+GLOBAL.moment().format("YYYYMMDDHHmmss") , dataBuffer, function(err) {
         if(err){
-            res.send(err);
+            res.json({success:true,url:''});
         }else{
-            res.send("保存成功！");
+            res.json({success:false});
         }
+        res.end();
     });
 });

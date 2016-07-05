@@ -1,6 +1,8 @@
 /**
  * Created by biqing.hu on 2015/12/16.
  */
+    global.APP_PATH=__dirname;
+console.log('global.APP_PATH=>'+global.APP_PATH)
 var writefile = require('writefile');
 var server = module.exports =require('./server');
 server.listen(process.env.PORT || 4123, function () {

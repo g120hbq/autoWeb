@@ -6,7 +6,7 @@
   "repository": "git@github.com:g120hbq/autoWeb.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -w . -e coffee,js,json -i dist/ app.js"
+    "dev": "nodemon -w ./*.js -e coffee,js,json -i dist/ app.js"
   },
   "keywords": [
     "learn"
@@ -55,6 +55,7 @@
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
     "merge2": "^0.3.6",
+    "moment": "^2.14.1",
     "mongoose": "^4.3.1",
     "through2": "^2.0.0"
   }
