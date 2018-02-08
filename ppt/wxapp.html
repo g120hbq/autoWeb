@@ -1,0 +1,203 @@
+<!--
+    Powered By nodeppt - This is probably the best web presentation tool so far!
+    version: 1.4.5
+    site: https://github.com/ksky521/nodeppt
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>58微信小程序的现状与未来 - By somebody</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide" data-transition="zoomin"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>58微信小程序的现状与未来</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>微信小程序介绍</h2>
+<ul>
+<li>微信内嵌web view 控件，本质上就是一个定制化的web浏览器</li>
+<li>js-sdk类似vue和ng的mvvm思想编写</li>
+<li>js里无法接触到dom,jQuery是完全不可以使用的</li>
+<li><p>官方开发工具功能简陋</p>
+</li>
+<li><p>完全封闭的环境不等于浏览器环境</p>
+</li>
+<li>WXML/WXSS/JS格式</li>
+<li>WXML 不等于 HTML</li>
+<li>WXSS 不等于 CSS3</li>
+<li>JS：支持ES6，ES5，不支持DOM</li>
+<li>不支持WEBGL,包含部分Canvas API</li>
+<li>封闭的发布渠道：程序需通过官方IDE提交审核</li>
+<li>腾讯完全控制客户端底层的内部实现</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<pre><code>## 小程序的优势：    
+
+1. 不用安装，即开即用，用完就走。省流量，省安装时间  
+2. 体验上虽然没法完全媲美原生APP，但综合考虑还是更优  
+3. 对于小程序拥有者来说，开发成本更低，他们可以更多财力，人力，精力放在如何运营好产品，做好内容本身  
+4. 对于用户来说，相较于各种APP，微信小程序UI和操作流程会更统一  
+这也会降低用户的使用难度  
+5. 对于小程序拥有者来说，相较于原生APP，推广更容易更简单，更省成本
+</code></pre>
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>生态体系</h1>
+<img src="./images/wxapp/weapp-map.jpg" alt="">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>58微信小程序的目前现状</h2>
+<ol>
+<li>生命周期</li>
+<li>数据服务</li>
+<li>gulp-sass</li>
+<li>ppu登陆逻辑</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>开发中发现的难点或者不好的地方</h1>
+<ol>
+<li>无法调用npm包</li>
+<li>无法使用babel转码</li>
+<li>无法重用组件(像React那样重用组件功能）</li>
+<li>异步请求5条并发上限,否则报错</li>
+<li><p>最多5个页面队列,否则不再跳转</p>
+<ul>
+<li><code>wx.navigateTo</code></li>
+<li><code>wx.redirectTo</code></li>
+<li><code>wx.navigateBack</code></li>
+</ul>
+</li>
+<li><p><code>wx.request</code> 不是promise化的接口</p>
+</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>项目中发现的问题</h1>
+<ol>
+<li>公共功能抽离不够</li>
+<li>命名规范不够统一</li>
+<li>自动构建功能不够友好</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>未来技术转型-两种微信小程序组件化开发方案</h2>
+<ol>
+<li>方案1 <code>wepy</code> 来自腾迅团队的解决方案,类<code>vue</code></li>
+<li>方案2 <code>labrador</code></li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>未来技术转型-项目代码设计层面</h2>
+<ol>
+<li>考虑性能--<code>debounce</code> <code>throttle</code> 函数去抖 函数节流 更简单的抽象化处理</li>
+<li>考虑维护性--将常量 与 数据请求部分抽离出来</li>
+<li>将部分常用WXAPI 封装一层，简化或降低BUG率</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>总结</h2>
+<ol>
+<li>组件化开发对项目开发效率质的提升</li>
+<li>小程序还在初始发展,后续会越来越跟上前端的步伐</li>
+<li>好的初始设计规划,能避免在项目大型化后遇到的各种尴尬</li>
+<li>微信公众号最终会替换成微信小程序</li>
+</ol>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodeppt v1.4.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+    var ASSET_RELATIVE_DIR = ".";
+</script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+if (typeof ASSET_RELATIVE_DIR === 'string') {
+    path = path + '/' + ASSET_RELATIVE_DIR;
+}
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'circle',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>

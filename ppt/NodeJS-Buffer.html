@@ -1,0 +1,287 @@
+<!--
+    Powered By nodeppt - This is probably the best web presentation tool so far!
+    version: 1.4.5
+    site: https://github.com/ksky521/nodeppt
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NodeJS中的Buffer - By 胡碧青</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide" data-transition="zoomin"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>理解 NodeJS 中的 Buffer</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>大纲</h1>
+
+</hgroup><article>
+
+<img src="http://on-img.com/chart_image/5a7a592ce4b0874437bef26a.png" alt="Buffer大纲">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>结构对象</h1>
+<ol>
+<li><p>类似Array 主要用来操作字节     </p>
+<ul>
+<li>每个字节都是 <code>0-255</code> 之间范围的数字</li>
+<li><code>[ 2f 2a 2a 0a 20 2a 20 53 75 ]</code></li>
+</ul>
+</li>
+<li><p>典型的 JavaScript 与 C++ 结合的模块</p>
+<ul>
+<li>性能部分用C++ 实现 , 非性能部分用 JS 实现</li>
+</ul>
+</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>内存分配</h1>
+<ol>
+<li><p>由Node C++层面进行内存申请，不影响node内存占用限制，属于堆外内存</p>
+</li>
+<li><p>slab分配机制</p>
+<ul>
+<li>一块申请好的固定大小的内存区域</li>
+<li>拥有: full ,partial , empty 三种状态</li>
+</ul>
+</li>
+<li><p>以8KB为界限区分Buffer是大对象还是小对象,每一个<code>slab</code>的大小固定为<code>8KB</code>,</p>
+<ul>
+<li>由JS层面以slab为单位进行分配<pre><code>buffer.poolSize = 8 * 1024
+</code></pre></li>
+</ul>
+</li>
+<li><p>以<code>poll</code> 作为中间处理对象，所有分配状态的slab单元都指向它</p>
+<pre><code class="js">let pool 
+function allocPool() {
+pool=nw SlowBuffer(Buffer.poolSize)
+pool.used=0
+}
+</code></pre>
+</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>转换</h1>
+<h2>可以与字符串进行互相转换,支持以下编码：</h2>
+<ul>
+<li>ASCII</li>
+<li>UTF-8</li>
+<li>UTF-16LE/UCS-2</li>
+<li>Base64</li>
+<li>Binary</li>
+<li>Hex (16进制)</li>
+</ul>
+<pre><code class="js">//字符串转Buffer
+new Buffer(str, [encoding])
+//Buffer转字符串
+buf.toString([encoding],[start],[end])
+//判断是否支持编码
+Buffer.isEncoding([encoding])
+//对不支持的编码类型进行转换，采用第三方库 iconv-lite
+const iconvLite = require(&#39;iconv-lite&#39;)
+const str = iconvLite.decode(buf,&#39;win1251&#39;) //buf转 win1251 字符串
+const buf = iconvLite.encode(str,&#39;win1251&#39;) //win1251 字符串转 Buffer
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>拼接</h1>
+<ul>
+<li>常用buffer场景示例:<pre><code class="js">const fs = require(&#39;fs&#39;)
+const rs = fs.createReadStream(&#39;test.txt&#39;)
+let result = &#39;&#39;
+rs.on(&#39;data&#39;,(chunk)=&gt;{
+  result += chunk
+}).on(&#39;end&#39;,()=&gt;{
+  console.log(result)
+})
+</code></pre>
+<blockquote>
+<p>这段代码对外国人的英语是没有问题的,英文字母是单字节的<br>而中文使用的是宽字节,在UTF-8编码下占用3个字节</p>
+<pre><code class="js">fs.createReadStream(&#39;test.txt&#39;,{heighWaterMark:11})
+//在分段读取文件内容会让一个汉字的3个字节拆分为不同的部分，而在字符串拼接时产生乱码
+</code></pre>
+</blockquote>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>setEncoding() 与string_decoder()</h1>
+<ul>
+<li>通过对可读流设置编码格式 <code>readable.setEncoding([encoding])</code> 可以解决常见的编码错误问题<ul>
+<li>在调用<code>setEncoding</code>时内部使用了<code>decoder</code>对象，进行了特殊处理<code>!</code></li>
+<li>缺点：只能识别 UTF-8, Base64, UCS-2/U</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>正确拼接Buffer</h1>
+<pre><code class="js">const chunks = []
+let size = 0
+res.on(&#39;data&#39;,()=&gt;{
+    chunks.push(chunk)
+    size += chunk.lenght
+}).on(&#39;end&#39;,()=&gt;{
+    const buf = Buffer.concat(chunks,size)
+    console.log(iconvLite.decode(buf,&#39;utf8&#39;))
+})
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Buffer与性能</h1>
+<pre><code class="js">const http = require(&#39;http&#39;)
+let word=&#39;...&#39; // 一个很长的字符串
+// word = new Buffer(word)
+http.createServer((req,res)=&gt;{
+    res.writeHead(200)
+    res.end(word)
+}).listen(8001)
+// QPS（每秒查询数）在启用Buffer转换后由 2527.64-&gt; 48612.56
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>文件读取</h1>
+<ul>
+<li>通过设置可读流的<code>highWaterMark</code> 对决定对磁盘的访问频率</li>
+<li>HighWaterMark值设置越大读取速度越快，但是会影响内存占用，需要合理权衡</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<pre><code class="js">var buf = new Buffer(&#39;nodejsv0.10.4&amp;nodejsv0.10.4&amp;nodejsv0.10.4&amp;nodejsv0.10.4&amp;&#39;);
+console.time(&#39;string += buf&#39;)
+var s = &#39;&#39;;
+for(var i=0;i&lt;10000;i++){
+    s += buf;
+}
+s;
+console.timeEnd(&#39;string += buf&#39;)
+
+
+console.time(&#39;buf concat&#39;)
+var list = [];
+var len=0;
+for(var i=0;i&lt;10000;i++){
+    list.push(buf);
+    len += buf.length;
+}
+var s2 = Buffer.concat(list, len).toString();
+console.timeEnd(&#39;buf concat&#39;)
+</code></pre>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>总结</h1>
+<ol>
+<li><p>Buffer与字符串的差异</p>
+<ul>
+<li>Buffer是二进制数据</li>
+<li>字符串与Buffer存在编码关系</li>
+</ul>
+</li>
+<li>什么时候需要用Buffer？<ul>
+<li>当保存非utf-8字符串，2进制等等其他格式的时候，必须使用</li>
+<li>大量的字符串拼接</li>
+</ul>
+</li>
+</ol>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodeppt v1.4.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+    var ASSET_RELATIVE_DIR = ".";
+</script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+if (typeof ASSET_RELATIVE_DIR === 'string') {
+    path = path + '/' + ASSET_RELATIVE_DIR;
+}
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'circle',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>

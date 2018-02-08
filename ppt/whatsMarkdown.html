@@ -1,0 +1,508 @@
+<!--
+    Powered By nodeppt - This is probably the best web presentation tool so far!
+    version: 1.4.5
+    site: https://github.com/ksky521/nodeppt
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> markdown的使用 - By somebody</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide" data-transition="zoomin"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>用来描述文档的标记语言Markdown</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>使用 Markdown 的优点</h1>
+<ol>
+<li>专注你的文字内容而不是排版样式，安心写作。</li>
+<li>轻松的导出 HTML、PDF 和本身的 .md 文件。</li>
+<li>纯文本内容，兼容所有的文本编辑器与字处理软件。</li>
+<li>随时修改你的文章版本，不必像字处理软件生成若干文件版本导致混乱。</li>
+<li>可读、直观、学习成本低。</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>有哪些网站正在使用markdown</h1>
+<ol>
+<li>github</li>
+<li>vscode</li>
+<li>有道云笔记</li>
+<li>简书</li>
+<li>一些markdown博客</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<pre><code class="markdown">This is an H1
+== 
+This is an H2
+--
+# 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+</code></pre>
+
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<h1>文字</h1>
+
+</hgroup><article>
+
+<h1>一级标题</h1>
+<h2>二级标题</h2>
+<h1>一级标题</h1>
+<h2>二级标题</h2>
+<h3>三级标题</h3>
+<h4>四级标题</h4>
+<h5>五级标题</h5>
+<h6>六级标题</h6>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<pre><code class="markdown">**你好**   
+这样来~~删除一段文本~~
+</code></pre>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>文字-强调</h1>
+<pre><code>两个*或-代表加粗，一个*或-代表斜体，~~代表删除。
+</code></pre><p><strong>你好</strong><br>这样来<del>删除一段文本</del><br><em>我是斜体文字</em></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>文字块</h1>
+<pre><code class="markdown">区块引用可以嵌套（例如：引用内的引用），只要根据层次加上不同数量的 &gt; ：
+
+&gt; This is the first level of quoting.
+&gt;
+&gt; &gt; This is nested blockquote.
+&gt;
+&gt; Back to the first level.
+</code></pre>
+<h2>效果</h2>
+<blockquote>
+<p>This is the first level of quoting.</p>
+<blockquote>
+<p>This is nested blockquote.</p>
+</blockquote>
+<p>Back to the first level.</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>换行</h1>
+<h2>在行尾添加两个空格加回车表示换行：</h2>
+<p>这是一行后面加两个空格<br>换行</p>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<pre><code class="markdown">*   Red
+*   Green
+  * dark green
+*   Blue 
+
++   Red
++   Green
++   Blue 
+
+-   Red
+-   Green
+-   Blue
+</code></pre>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>列表-无序列表</h1>
+<p>无序列表使用-、+和*作为列表标记</p>
+<ul>
+<li>Red</li>
+<li>Green<ul>
+<li>dark green</li>
+</ul>
+</li>
+<li>Blue</li>
+</ul>
+<ul>
+<li>Red</li>
+<li>Green</li>
+<li>Blue</li>
+</ul>
+<ul>
+<li>Red</li>
+<li>Green</li>
+<li>Blue</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<pre><code class="markdown">1.  Bird
+2.  McHale
+3.  Parish
+</code></pre>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>列表-有序列表</h1>
+<p>有序列表则使用数字加英文句点.来表示</p>
+<ol>
+<li>Bird</li>
+<li>McHale</li>
+<li>Parish</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>链接</h1>
+<p><a href="http://www.baidu.com" target="_blank">百度</a><br><a href="http://www.baidu.com" target="_blank">http://www.baidu.com</a> </p>
+<pre><code class="markdon">[百度](http://www.baidu.com)
+&lt;http://www.baidu.com&gt;
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>图片</h1>
+<pre><code class="markdown">![mi6](http://hd.mi.com/x/04101r/img/top-bg.jpg)
+</code></pre>
+<p><img src="http://hd.mi.com/x/04101r/img/top-bg.jpg" alt="mi6">  </p>
+<ul class="rollIn">
+<li>图片和链接的区别就是多了一个感叹号 </li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<pre><code class="markdown">dog | bird | cat
+-|:-:|:-:
+foo | foo  | foo
+bar | bar  | bar
+baz | baz  | baz
+</code></pre>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>表格</h1>
+<table>
+<thead>
+<tr>
+<th>dog</th>
+<th style="text-align:center">bird</th>
+<th style="text-align:center">cat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>foo</td>
+<td style="text-align:center">foo</td>
+<td style="text-align:center">foo</td>
+</tr>
+<tr>
+<td>bar</td>
+<td style="text-align:center">bar</td>
+<td style="text-align:center">bar</td>
+</tr>
+<tr>
+<td>baz</td>
+<td style="text-align:center">baz</td>
+<td style="text-align:center">baz</td>
+</tr>
+</tbody>
+</table>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<pre><code class="markdown">[``` javascript]
+class HelloMessage extends React.Component {
+  render() {
+    return &lt;div&gt;Hello {this.props.name}&lt;/div&gt;;
+  }
+}
+
+ReactDOM.render(
+  &lt;HelloMessage name=&quot;John&quot; /&gt;,
+  document.getElementById(&#39;container&#39;)
+);
+[```]
+</code></pre>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>代码块</h1>
+<pre><code class="javascript">class HelloMessage extends React.Component {
+  render() {
+    return &lt;div&gt;Hello {this.props.name}&lt;/div&gt;;
+  }
+}
+
+ReactDOM.render(
+  &lt;HelloMessage name=&quot;John&quot; /&gt;,
+  document.getElementById(&#39;container&#39;)
+);
+</code></pre>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<pre><code class="markdown">[```html]
+&lt;html&gt;
+    &lt;body&gt;
+     hellow
+    &lt;/body&gt;
+&lt;/html&gt;
+[```]
+</code></pre>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>html</h1>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+     hellow
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image:url('./images/bg1.png')"><section class="slide-wrapper"><article>
+<h2>分隔线</h2>
+<hr>
+<p>在一行中用三个以上的*、-、_来建立一个分隔线，行内不能有其他东西。也可以在符号间插入空格。</p>
+<pre><code class="markdon">***
+---
+___
+
+* * *
+</code></pre>
+<hr>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>这是一个脚注的例子<a href="http://www.jianshu.com/p/82e730892d42" target="_blank">帮助资料</a></p>
+
+</section>
+</aside><section class="slide-wrapper"><article>
+<p>脚注</p>
+<p>这是一个脚注的例子<a href="http://www.jianshu.com/p/82e730892d42" target="_blank">帮助资料</a>,<a href="http://www.github.com" target="_blank">github好</a></p>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<pre><code class="html">字体 
+&lt;font face=&quot;微软雅黑&quot; color=&quot;red&quot; size=&quot;6&quot;&gt;字体及字体颜色和大小&lt;/font&gt;
+&lt;font color=&quot;#0000ff&quot;&gt;字体颜色&lt;/font&gt;
+文本对齐方式
+&lt;p align=&quot;left&quot;&gt;居左文本&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;居中文本&lt;/p&gt;
+&lt;p align=&quot;right&quot;&gt;居右文本&lt;/p&gt;
+</code></pre>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>常用弥补Markdown的Html标签</h1>
+<h2>字体</h2>
+<font face="微软雅黑" color="red" size="6">字体及字体颜色和大小</font>
+<font color="#0000ff">字体颜色</font>
+
+<h2>文本对齐方式</h2>
+<p align="left">居左文本</p>
+<p align="center">居中文本</p>
+<p align="right">居右文本</p>
+</article></section></slide>
+<slide class="slide" data-transition="cover-circle"><section class="slide-wrapper"><hgroup>
+<h2>为什么选择nodePPT</h2>
+
+</hgroup><article>
+
+<ul class="rollIn">
+<li>基于<a href="https://www.zybuluo.com/techird/note/46064" target="_blank">GFM的markdown</a>语法编写</li>
+<li>支持html混排，再复杂的demo也可以做！</li>
+<li>导出网页或者pdf更容易分享</li>
+<li>支持单页背景图片</li>
+<li>多种模式：纵览模式，双屏模式，远程控制</li>
+<li>可以使用画板，可以使用note做备注</li>
+<li>支持语法高亮，自由选择highlight样式</li>
+<li>可以单页ppt内部动效，单步动效</li>
+<li>支持进入/退出回调，做在线demo很方便</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"   data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><div class="magic"><div class="magicItem current pagedown"  data-transition="earthquake"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h2>演示magic标签效果</h2>
+
+</hgroup><article>
+
+<div class="columns3">
+    <img src="./images/girl.jpg" height="450">
+    <img src="./images/girl.jpg" height="450">
+    <img src="./images/girl.jpg" height="450">
+</div>
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  data-transition="earthquake"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h2>演示earthquake转场效果</h2>
+
+</hgroup><article>
+
+<div class="columns4">
+    <img src="./images/girl.jpg" height="320">
+    <img src="./images/girl.jpg" height="320">
+    <img src="./images/girl.jpg" height="320">
+    <img src="./images/girl.jpg" height="320">
+</div>
+</article>
+</div>
+</article></div></div></section></slide>
+<slide class="slide" data-on-enter="testScriptTag"><aside class="note">
+<section>
+<pre><code>&lt;p id=&quot;abc&quot;&gt;我的id是abc&lt;/p&gt;
+点击我隐藏或显示abc {:#testScriptTag}
+&lt;script&gt;
+    function testScriptTag(){
+       document.getElementById(&#39;testScriptTag&#39;).onclick=function(){
+           var isHide=document.querySelector(&#39;#abc&#39;).style.display==&#39;none&#39;;
+           document.querySelector(&#39;#abc&#39;).style.display=isHide?&quot;block&quot;:&quot;none&quot;
+       }
+    } 
+&lt;/script&gt;
+</code></pre>
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>事件支持</h1>
+<p id="abc">我的id是abc</p>
+
+<p id="testScriptTag">点击我隐藏或显示abc</p>
+<script>
+    function testScriptTag(){
+       document.getElementById('testScriptTag').onclick=function(){
+           var isHide=document.querySelector('#abc').style.display=='none';
+           document.querySelector('#abc').style.display=isHide?"block":"none"
+       }
+    } 
+</script>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>更多相关资料</h2>
+
+</hgroup><article>
+
+<ol>
+<li><a href="http://www.jianshu.com/p/82e730892d42" target="_blank">Markdown的常用语法</a></li>
+<li><a href="http://www.cnblogs.com/hnrainll/p/3514637.html" target="_blank">Markdown 11种基本语法</a></li>
+<li><a href="http://www.sanwen8.com/p/83v2cgdo.html" target="_blank">GFM 格式markdown说明</a></li>
+<li><a href="https://github.com/ksky521/nodePPT" target="_blank">nodeppt github地址</a></li>
+<li><a href="http://qdemo.sinaapp.com/" target="_blank">nodeppt 官方ppt</a></li>
+<li><a href="https://www.zybuluo.com/mdeditor" target="_blank">markdown在线编辑器</a></li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>相关问题</h1>
+<ol>
+<li>markdown比普通txt文本或者word好在哪里?</li>
+<li>nodeppt相比普通ppt优缺点有哪些</li>
+</ol>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodeppt v1.4.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+    var ASSET_RELATIVE_DIR = ".";
+</script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+if (typeof ASSET_RELATIVE_DIR === 'string') {
+    path = path + '/' + ASSET_RELATIVE_DIR;
+}
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'circle',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>
